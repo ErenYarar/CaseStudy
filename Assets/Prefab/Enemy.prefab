@@ -785,6 +785,7 @@ GameObject:
   - component: {fileID: 8747908882083249021}
   - component: {fileID: 611382545013470268}
   - component: {fileID: 1106795322691580345}
+  - component: {fileID: 3687021749872082668}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -823,7 +824,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!135 &8459894176708633543
 SphereCollider:
@@ -892,6 +893,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794f9e5d1ab44f64b82c69c2fa19711d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3687021749872082668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651824957591649213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b8fcfaf50bdd043a4f8eede2082a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 8459894176708633543}
 --- !u!1 &2765821052821368729
 GameObject:
   m_ObjectHideFlags: 0

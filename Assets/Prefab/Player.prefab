@@ -1352,6 +1352,7 @@ GameObject:
   - component: {fileID: 9115452286971545392}
   - component: {fileID: 3452574429707490794}
   - component: {fileID: 3452574429707490793}
+  - component: {fileID: 7352105541996770830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1465,6 +1466,20 @@ MonoBehaviour:
   JoystickSize: {x: 300, y: 300}
   Joystick: {fileID: 0}
   Player: {fileID: 3452574429707490794}
+--- !u!114 &7352105541996770830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2534237924803446768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b01f659241b014d891df7d5de0efc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 3592712698086318}
+  playerMovement: {fileID: 3452574429707490793}
 --- !u!1 &2645264038600938532
 GameObject:
   m_ObjectHideFlags: 0

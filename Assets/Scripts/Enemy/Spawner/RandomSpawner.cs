@@ -12,7 +12,7 @@ public class RandomSpawner : MonoBehaviour
     {
         if (currentSpawnCount < spawnCount)
         {
-            Vector3 randomSpawnPosition = new Vector3(Random.Range(-20, 20), 0.05f, Random.Range(-20, 20));
+            Vector3 randomSpawnPosition = new Vector3(Random.Range(-15, 15), 0.05f, Random.Range(-15, 15));
             GameObject spawnedEnemy = Instantiate(enemy, randomSpawnPosition, Quaternion.identity);
             
             // Klon hedef dosyası
