@@ -8,6 +8,9 @@ using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : MonoBehaviour
 {
+    Animator playerAnimator;
+    Rigidbody playerRb;
+
     [Header("Joystick")]
     [SerializeField] Vector2 JoystickSize = new Vector2(300, 300);
     [SerializeField] FloatingJoystick Joystick;
@@ -18,6 +21,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("AI")]
     [SerializeField] private NavMeshAgent Player;
 
+    private void Start()
+    {
+        playerRb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
+    }
+
     private void Update()
     {
         Vector3 scaledMovement = Player.speed * Time.deltaTime * new Vector3(
@@ -26,8 +35,34 @@ public class PlayerMovement : MonoBehaviour
             MovementAmount.y
         );
 
+        if (scaledMovement.magnitude > 0)
+        {
+            playerAnimator.SetBool("isRunning", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("isRunning", false);
+        }
+
         Player.transform.LookAt(transform.position + scaledMovement, Vector3.up);
         Player.Move(scaledMovement);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            playerAnimator.SetBool("isFloating", true);
+            Vector3 moveDirection = playerRb.transform.position - collision.transform.position;
+            playerRb.AddForce(moveDirection.normalized * 1000f);
+            StartCoroutine(WaitForAnimEnded());
+        }
+    }
+
+    IEnumerator WaitForAnimEnded()
+    {
+        yield return new WaitForSeconds(.5f);
+        playerAnimator.SetBool("isFloating", false);
     }
 
     private void OnEnable()
