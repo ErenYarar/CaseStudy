@@ -2,24 +2,19 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    Transform tr;
-    Transform player;
+    private Vector3 _offset;
+    [SerializeField] Transform player; // Karakter Transform
+    [SerializeField] float smoothSpeed; // Kamera hareketinin yumuşaklığı
+    private Vector3 _currentVelocity = Vector3.zero; // Kamera ile karakter arasındaki mesafe
 
-    Vector3 vec;
-
-    private void Start()
+    private void Awake()
     {
-        tr = transform;
-        player = GameObject.FindWithTag("Player").transform;
-
-        vec = -tr.forward * 25f; //25
-
-        tr.position = player.position + vec;
+        _offset = transform.position - player.position;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        tr.position = Vector3.Lerp(tr.position, player.position + vec, 0.075f); 
+        Vector3 playerPosition = player.position + _offset;
+        transform.position = Vector3.SmoothDamp(transform.position, playerPosition, ref _currentVelocity, smoothSpeed);
     }
-
 }
