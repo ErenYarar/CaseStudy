@@ -8,9 +8,6 @@ using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Rigidbody rb;
-    // [SerializeField] [Range(0,5)] private float MaxSpeed = 2.75f;
-
     [Header("Joystick")]
     [SerializeField] Vector2 JoystickSize = new Vector2(300, 300);
     [SerializeField] FloatingJoystick Joystick;
@@ -121,7 +118,6 @@ public class PlayerMovement : MonoBehaviour
 
         return StartPosition;
     }
-
 
     // private Vector2 ClampStartPosition(Vector2 StartPosition)
     // {
