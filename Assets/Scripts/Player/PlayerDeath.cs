@@ -40,6 +40,8 @@ public class PlayerDeath : MonoBehaviour
 
             nva.enabled = false; //navmesh kapatılarak karakterin düşüşü gerçekleştir
 
+            gameObject.tag = "Untagged"; // tag kapat (ölü player takip etmesi kapatıldı)
+
             sphereCollider.enabled = false; // Tekrar vurmayı engellemek için sphere kapatıldı
             isDying = true; // ölüm koşulu true yapıldı
 
