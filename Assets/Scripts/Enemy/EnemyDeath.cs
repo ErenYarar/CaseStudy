@@ -9,6 +9,7 @@ public class EnemyDeath : MonoBehaviour
     [SerializeField] SphereCollider sphereCollider;
     private bool isDead = false;
     private float deathTimer = 0f;
+    [SerializeField] private bool isPlayerCollision = false;
 
     private void Start()
     {
@@ -49,9 +50,26 @@ public class EnemyDeath : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Border")) //"Border" tag'li duvara çarpma
+        if (other.CompareTag("Border") && isPlayerCollision)
+        {
+            ScoreManager.Instance.IncreaseScore();
+            Die(); // Die fonk. çalıştır
+        }
+        else if (other.CompareTag("Border")) //"Border" tag'li duvara çarpma
         {
             Die(); // Die fonk. çalıştır
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player")) // Player ile çarpışma
+        {
+            isPlayerCollision = true;
+        }
+        if (other.gameObject.CompareTag("Enemy")) // Player ile çarpışma
+        {
+            isPlayerCollision = false;
         }
     }
 }

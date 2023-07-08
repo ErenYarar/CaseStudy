@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody playerRb;
 
     // Düşmana vurma gücü
-    private float minFloat = 800f;
+    private float minFloat = 500f;
     private float maxFloat = 1000f;
     private float forceHit;
 

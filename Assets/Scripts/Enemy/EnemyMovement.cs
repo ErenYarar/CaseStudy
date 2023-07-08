@@ -9,10 +9,11 @@ public class EnemyMovement : MonoBehaviour
     private NavMeshAgent nva;
     private Rigidbody enemyRb;
     private GameObject[] targets;
+    private GameObject player;
     private Animator animator;
 
     // Düşmana vurma gücü
-    private float minFloat = 800f;
+    private float minFloat = 500f;
     private float maxFloat = 1000f;
     private float forceHit;
 
@@ -24,7 +25,8 @@ public class EnemyMovement : MonoBehaviour
 
         // Hedefleri ayarla: Oyuncu ve diğer düşmanlar
         targets = GameObject.FindGameObjectsWithTag("Enemy");
-        targets = targets.Concat(new[] { GameObject.FindGameObjectWithTag("Player") }).ToArray();
+        player = GameObject.FindGameObjectWithTag("Player");
+        targets = targets.Concat(new[] { player }).ToArray();
     }
 
     private void FixedUpdate()
@@ -47,7 +49,6 @@ public class EnemyMovement : MonoBehaviour
             // Son düşman kaldıysa, doğrudan oyuncuyu takip et
             if (RandomSpawner.Instance.spawnCount == 1)
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
                 if (player != null)
                 {
                     if (nva.isActiveAndEnabled)
