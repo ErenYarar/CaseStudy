@@ -10,14 +10,17 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody enemyRb;
     private GameObject[] targets;
     private Animator animator;
-    private Vector3 initialPosition;
+
+    // Düşmana vurma gücü
+    private float minFloat = 800f;
+    private float maxFloat = 1000f;
+    private float forceHit;
 
     private void Start()
     {
         nva = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody>();
-        initialPosition = transform.position;
 
         // Hedefleri ayarla: Oyuncu ve diğer düşmanlar
         targets = GameObject.FindGameObjectsWithTag("Enemy");
@@ -68,8 +71,11 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))
         {
             animator.SetBool("isFloating", true);
+
+            forceHit = UnityEngine.Random.Range(minFloat, maxFloat);
             Vector3 moveDirection = enemyRb.transform.position - collision.transform.position;
-            enemyRb.AddForce(moveDirection.normalized * 1000f);
+            enemyRb.AddForce(moveDirection.normalized * forceHit);
+
             StartCoroutine(WaitForAnimEnded());
         }
     }

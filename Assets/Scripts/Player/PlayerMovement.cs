@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     Animator playerAnimator;
     Rigidbody playerRb;
 
+    // Düşmana vurma gücü
+    private float minFloat = 800f;
+    private float maxFloat = 1000f;
+    private float forceHit;
+
     [Header("Joystick")]
     [SerializeField] Vector2 JoystickSize = new Vector2(300, 300);
     [SerializeField] FloatingJoystick Joystick;
@@ -18,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private Finger MovementFinger;
     private Vector2 MovementAmount;
 
+    [Space]
     [Header("AI")]
     [SerializeField] private NavMeshAgent Player;
 
@@ -53,8 +59,11 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             playerAnimator.SetBool("isFloating", true);
+
+            forceHit = UnityEngine.Random.Range(minFloat, maxFloat);
             Vector3 moveDirection = playerRb.transform.position - collision.transform.position;
-            playerRb.AddForce(moveDirection.normalized * 1000f);
+            playerRb.AddForce(moveDirection.normalized * forceHit);
+
             StartCoroutine(WaitForAnimEnded());
         }
     }
