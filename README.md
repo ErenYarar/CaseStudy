@@ -1,5 +1,8 @@
 # CaseStudy
 
+## Video
+https://youtu.be/-hqBMWTVqao
+
 ## Screenshots
 
 ![1](https://github.com/ErenYarar/CaseStudy/assets/41026127/a6cdab85-ca8a-4ade-be11-a36d61ec778c )
