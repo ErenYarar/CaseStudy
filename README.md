@@ -1,8 +1,8 @@
 # CaseStudy
 
-# Screenshots
+## Screenshots
 
-![1](https://github.com/ErenYarar/CaseStudy/assets/41026127/a6cdab85-ca8a-4ade-be11-a36d61ec778c)
+![1](https://github.com/ErenYarar/CaseStudy/assets/41026127/a6cdab85-ca8a-4ade-be11-a36d61ec778c )
 
 ![2](https://github.com/ErenYarar/CaseStudy/assets/41026127/95207eb2-4c2a-49d3-8fb7-de1e6754b71a)
 
