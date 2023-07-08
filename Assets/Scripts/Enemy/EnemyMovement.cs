@@ -42,6 +42,25 @@ public class EnemyMovement : MonoBehaviour
                 Debug.LogWarning("NavMeshAgent is disabled.");
             }
         }
+        else
+        {
+            // Son düşman kaldıysa, doğrudan oyuncuyu takip et
+            if (RandomSpawner.Instance.spawnCount == 1)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                {
+                    if (nva.isActiveAndEnabled)
+                    {
+                        nva.destination = player.transform.position;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("NavMeshAgent is disabled.");
+                    }
+                }
+            }
+        }
     }
 
     private GameObject FindClosestTarget()
