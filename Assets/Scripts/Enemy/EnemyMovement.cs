@@ -52,7 +52,7 @@ public class EnemyMovement : MonoBehaviour
 
         foreach (GameObject target in targets)
         {
-            if (target != gameObject) // Kendi kendini hedef olarak alma
+            if (target != null && target != gameObject) // Kendi kendini hedef olarak alma
             {
                 float distance = Vector3.Distance(target.transform.position, currentPosition);
                 if (distance < closestDistance)

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyDeath : MonoBehaviour
 {
@@ -22,13 +23,21 @@ public class EnemyDeath : MonoBehaviour
             deathTimer -= Time.deltaTime; // deathTimer süresini geriye doğru say
             if (deathTimer <= 0) // Eğer deathTimer 0 veya aşağıya inerse
             {
-                gameObject.SetActive(false); // Karakteri verilen süre içinde kapat
+                if (RandomSpawner.Instance.spawnCount <= 0) // Eğer düşman sayısı 0 veya aşağısındaysa
+                {
+                    SceneManager.LoadScene("Game");  // oyunu yeniden başlat
+                }
+                else
+                {
+                    gameObject.SetActive(false); //  Karakteri verilen süre içinde kapat
+                }
             }
         }
     }
 
     private void Die()
     {
+        RandomSpawner.Instance.UpdateEnemyCount();
         isDead = true;
         animator.SetTrigger("Death"); // Ölüm animasyonu oynat
         nva.enabled = false; //navmesh kapatılarak karakterin düşüşü gerçekleştir

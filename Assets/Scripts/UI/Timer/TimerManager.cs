@@ -15,7 +15,6 @@ public class TimerManager : MonoBehaviour
     {
         currentTime = totalTime;
         UpdateTimerText();
-        // StartTimer();
     }
 
     private void Update()
@@ -27,7 +26,7 @@ public class TimerManager : MonoBehaviour
         }
         else
         {
-            // Geriye sayım tamamlandığında yapılmasını istediğiniz işlemleri burada gerçekleştirebilirsiniz.
+            // Geriye sayım tamamlandığında:
             SceneManager.LoadScene("Game"); // Sahneyi yeniden başlat
         }
     }
@@ -37,9 +36,4 @@ public class TimerManager : MonoBehaviour
         TimeSpan timeSpan = TimeSpan.FromSeconds(currentTime);
         timerText.text = string.Format("{0}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
-
-    // private void StartTimer()
-    // {
-    //     // Timer'ı başlatmak için gereken kodlar
-    // }
 }
