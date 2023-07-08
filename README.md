@@ -1,7 +1,14 @@
 # CaseStudy
 
 ## Video
-https://youtu.be/-hqBMWTVqao
+### Full GamePlay 
+https://youtu.be/-hqBMWTVqao 
+
+### Short Win GamePlay 
+https://youtu.be/APZ0WESaK3c
+
+### Short Lose GamePlay 
+https://youtu.be/mtlCST25_jM
 
 ## Screenshots
 
