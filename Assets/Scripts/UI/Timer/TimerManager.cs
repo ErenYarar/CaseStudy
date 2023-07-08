@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class TimerManager : MonoBehaviour
     {
         currentTime = totalTime;
         UpdateTimerText();
-        StartTimer();
+        // StartTimer();
     }
 
     private void Update()
@@ -27,7 +28,7 @@ public class TimerManager : MonoBehaviour
         else
         {
             // Geriye sayım tamamlandığında yapılmasını istediğiniz işlemleri burada gerçekleştirebilirsiniz.
-            // Örneğin, oyunu durdurabilir veya bir işlevi çağırabilirsiniz.
+            SceneManager.LoadScene("Game"); // Sahneyi yeniden başlat
         }
     }
 
@@ -37,9 +38,8 @@ public class TimerManager : MonoBehaviour
         timerText.text = string.Format("{0}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
 
-    private void StartTimer()
-    {
-        // Timer'ı başlatmak için gereken kodları buraya yazabilirsiniz.
-        // Örneğin, gerekirse bir animasyonu başlatabilir veya diğer oyun nesnelerine komut verebilirsiniz.
-    }
+    // private void StartTimer()
+    // {
+    //     // Timer'ı başlatmak için gereken kodlar
+    // }
 }

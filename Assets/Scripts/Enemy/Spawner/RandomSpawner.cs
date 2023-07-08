@@ -4,7 +4,6 @@ public class RandomSpawner : MonoBehaviour
 {
     public GameObject enemy;
     public Transform destinationFolder; // Hedef dosyanın Transformu
-
     public int spawnCount = 20;
     private int currentSpawnCount = 0;
 
