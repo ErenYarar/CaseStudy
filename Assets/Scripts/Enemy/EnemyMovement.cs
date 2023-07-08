@@ -29,8 +29,15 @@ public class EnemyMovement : MonoBehaviour
         GameObject closestTarget = FindClosestTarget();
         if (closestTarget != null)
         {
-            // En yakın hedefe doğru hareket et
-            nva.destination = closestTarget.transform.position;
+            if (nva.isActiveAndEnabled)
+            {
+                // En yakın hedefe doğru hareket et
+                nva.destination = closestTarget.transform.position;
+            }
+            else
+            {
+                Debug.LogWarning("NavMeshAgent is disabled.");
+            }
         }
     }
 

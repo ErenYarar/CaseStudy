@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
     private NavMeshAgent nva;
     private Animator animator;
-    bool isDying = false;
-    float deathTimer = 0f;
-    // public GameObject deathMenu;
+    private bool isDying = false;
+    private float deathTimer = 0f;
     [SerializeField] SphereCollider sphereCollider;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] GameObject joystick;
@@ -20,32 +20,33 @@ public class PlayerDeath : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // private void Update()
-    // {
-    //     if (isDying)
-    //     {
-    //         deathTimer -= Time.deltaTime;
-    //         if (deathTimer <= 0)
-    //         {
-    //             // deathMenu.SetActive(true);
-    //             Time.timeScale = 0f;
-    //         }
-    //     }
-    // }
+    private void Update()
+    {
+        if (isDying) // Ölüm koşulu true olursa
+        {
+            deathTimer -= Time.deltaTime; // deathTimer süresini geriye doğru say
+            if (deathTimer <= 0) // Eğer deathTimer 0 veya aşağıya inerse
+            {
+                SceneManager.LoadScene("Game"); // Sahneyi yeniden başlat
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Border") && !isDying)
+        if (other.CompareTag("Border") && !isDying) // "Border" tag'li duvara çarpma VE ölüm koşulu 
         {
-            animator.SetTrigger("Death");
-            nva.velocity = Vector3.zero;
-            nva.isStopped = true;
-            sphereCollider.enabled = false;
-            isDying = true;
+            animator.SetTrigger("Death"); // Ölüm animasyonu oynat
 
-            playerMovement.enabled = false;
-            joystick.SetActive(false);
-            // deathTimer = 1f;
+            nva.enabled = false; //navmesh kapatılarak karakterin düşüşü gerçekleştir
+
+            sphereCollider.enabled = false; // Tekrar vurmayı engellemek için sphere kapatıldı
+            isDying = true; // ölüm koşulu true yapıldı
+
+            playerMovement.enabled = false; // Player hareketi öldükten sonra engellendi
+            joystick.SetActive(false); // Joystick görüntüsünün gözükmesi engellendi
+
+            deathTimer = 2f; // Ölüm süresi, Update içerisinde geri sayım 
         }
     }
 }
