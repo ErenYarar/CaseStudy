@@ -5,9 +5,9 @@ using UnityEngine;
 public class FloatingJoystick : MonoBehaviour
 {
     [HideInInspector]
-    public RectTransform RectTransform;
-    public RectTransform Knob;
+    public RectTransform RectTransform; // Joystick'in RectTransform bileşeni
+    public RectTransform Knob; // Joystick'in Knob bileşeni
     private void Awake() {
-        RectTransform = GetComponent<RectTransform>();
+        RectTransform = GetComponent<RectTransform>(); // RectTransform bileşenini alır
     }
 }

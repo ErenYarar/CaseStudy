@@ -11,25 +11,25 @@ public class PauseManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0f; // Oyun zamanını durdur
-        pauseMenu.SetActive(true); // Pause menüsünü aç
-        pauseBtn.SetActive(false);
+        pauseMenu.SetActive(true); // Pause menüsünü açar
+        pauseBtn.SetActive(false); // Pause butonu gizler
     }
 
-    public void Resume()
+    public void Resume() // Oyuna devam etme butonu
     {
-        Time.timeScale = 1f; // Oyun zamanını tekrar başlat
-        pauseMenu.SetActive(false); // Pause menüsünü kapat
-        pauseBtn.SetActive(true);
+        Time.timeScale = 1f; // Oyun zamanını tekrar başlatır
+        pauseMenu.SetActive(false); // Pause menüsünü kapatır
+        pauseBtn.SetActive(true); // Pause butonu açar
     }
 
-    public void RestartGame() //Restart btn
+    public void RestartGame() //Oyuna yeniden başlama butonu
     {
-        SceneManager.LoadScene("Game"); // Sahneyi başlat
-        Time.timeScale = 1; // Oyun zamanını tekrar başlat
+        SceneManager.LoadScene("Game"); // Sahneyi başlatır
+        Time.timeScale = 1; // Oyun zamanını tekrar başlatır
     }
 
     public void QuitGame() //quit btn
     {
-        Application.Quit();
+        Application.Quit(); 
     }
 }

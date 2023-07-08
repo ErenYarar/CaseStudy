@@ -4,33 +4,33 @@ using UnityEngine.SceneManagement;
 
 public class EnemyDeath : MonoBehaviour
 {
-    private NavMeshAgent nva;
-    private Animator animator;
-    [SerializeField] SphereCollider sphereCollider;
-    private bool isDead = false;
-    private float deathTimer = 0f;
-    [SerializeField] private bool isPlayerCollision = false;
+    private NavMeshAgent nva; // Düşmanın NavMeshAgent bileşeni
+    private Animator animator; // Düşmanın Animator bileşeni
+    [SerializeField] SphereCollider sphereCollider; // Düşmanın SphereCollider bileşeni
+    private bool isDead = false; // Düşmanın ölü olup olmadığını belirten boolean değeri
+    private float deathTimer = 0f; // Ölüm sonrası bekleme süresi
+    [SerializeField] private bool isPlayerCollision = false; // Oyuncuyla çarpışmanın gerçekleşip gerçekleşmediğini belirten boolean değeri
 
     private void Start()
     {
-        nva = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        nva = GetComponent<NavMeshAgent>(); // Düşmanın NavMeshAgent bileşenini inspector'dan alır
+        animator = GetComponent<Animator>(); // Düşmanın Animator bileşenini inspector'dan alır
     }
 
     private void Update()
     {
-        if (isDead) // Ölüm koşulu true olursa
+        if (isDead)  // Düşman öldüyse
         {
-            deathTimer -= Time.deltaTime; // deathTimer süresini geriye doğru say
+            deathTimer -= Time.deltaTime; // deathTimer süresini geriye doğru sayar
             if (deathTimer <= 0) // Eğer deathTimer 0 veya aşağıya inerse
             {
-                if (RandomSpawner.Instance.spawnCount <= 0) // Eğer düşman sayısı 0 veya aşağısındaysa
+                if (RandomSpawner.Instance.spawnCount <= 0) // Eğer üretilmesi gereken düşman sayısı 0 veya aşağısındaysa
                 {
                     SceneManager.LoadScene("Game");  // oyunu yeniden başlat
                 }
                 else
                 {
-                    gameObject.SetActive(false); //  Karakteri verilen süre içinde kapat
+                    gameObject.SetActive(false); // Belirtilen süre içinde düşmanın aktifliğini kapatır
                 }
             }
         }
@@ -38,21 +38,21 @@ public class EnemyDeath : MonoBehaviour
 
     private void Die()
     {
-        RandomSpawner.Instance.UpdateEnemyCount();
-        isDead = true;
-        animator.SetTrigger("Death"); // Ölüm animasyonu oynat
-        nva.enabled = false; //navmesh kapatılarak karakterin düşüşü gerçekleştir
-        gameObject.tag = "Untagged"; // tag kapat (ölü düşmanı takip etmesi kapatıldı)
-        sphereCollider.enabled = false; // Tekrar vurmayı engellemek için sphere kapatıldı
-        deathTimer = 2f; // Ölüm süresi, Update içerisinde geri sayım 
+        RandomSpawner.Instance.UpdateEnemyCount(); // Üretilmesi gereken düşman sayısını azaltıp, Text yazdırır
+        isDead = true; // Düşman öldü
+        animator.SetTrigger("Death"); // Ölüm animasyonu oynatır
+        nva.enabled = false; // Düşmanın NavMeshAgent bileşenini devre dışı bırakarak hareketini durdurur
+        gameObject.tag = "Untagged"; // Düşmanın tag'ini kaldırır (ölü düşmanı takip etmeyi durdur)
+        sphereCollider.enabled = false; // Tekrar vurulmayı engellemek için SphereCollider'ı devre dışı bırak
+        deathTimer = 2f; // Ölüm sonrası bekleme süresi, Update içinde geriye doğru sayılacak
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Border") && isPlayerCollision)
+        if (other.CompareTag("Border") && isPlayerCollision) // Eğer düşmanın son çarptığı Player ise VE "Border" tag'li duvara çarparsa
         {
-            ScoreManager.Instance.IncreaseScore();
+            ScoreManager.Instance.IncreaseScore(); // Skor artışı gerçekleştirilir
             Die(); // Die fonk. çalıştır
         }
         else if (other.CompareTag("Border")) //"Border" tag'li duvara çarpma
@@ -65,11 +65,11 @@ public class EnemyDeath : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) // Player ile çarpışma
         {
-            isPlayerCollision = true;
+            isPlayerCollision = true; // Player ile çarpışma gerçekleşti
         }
-        if (other.gameObject.CompareTag("Enemy")) // Player ile çarpışma
+        if (other.gameObject.CompareTag("Enemy")) // Enemy ile çarpışma
         {
-            isPlayerCollision = false;
+            isPlayerCollision = false; // Enemy ile çarpışma gerçekleşti
         }
     }
 }

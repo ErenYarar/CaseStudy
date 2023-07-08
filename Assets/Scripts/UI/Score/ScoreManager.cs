@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance { get; private set; }
+    public static ScoreManager Instance { get; private set; } // Singleton instance'ı
     [HideInInspector] public int score = 0;  // Skor değişkeni, diğer scriptlerden erişilebilir
-    public Text scoreText;  // Skoru göstermek için kullanılacak Text nesnesi
+    public Text scoreText;  // Skoru göstermek için kullanılacak Text 
 
     private void Awake()
     {
@@ -24,6 +24,6 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseScore()
     {
         score += 500;  // Skoru 500 puan artır
-        scoreText.text = score.ToString();  // Skoru güncelleyerek Text'e yazdır
+        scoreText.text = score.ToString();  // Skoru güncelleyerek Text'e yazdırır
     }
 }
